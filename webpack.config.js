@@ -1,6 +1,5 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
-
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
     orgName: "mf-user",
@@ -8,6 +7,8 @@ module.exports = (webpackConfigEnv, argv) => {
     webpackConfigEnv,
     argv,
   });
+  // add postcss-loader into rule css
+  defaultConfig.module.rules[1].use.push("postcss-loader");
 
   const result = merge(defaultConfig, {
     module: {
